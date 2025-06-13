@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://nutriflex-ai.up.railway.app"
+    "https://nutriflex.vercel.app"
 ]
 
 CORS_ALLOW_METHODS = (
