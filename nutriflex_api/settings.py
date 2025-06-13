@@ -14,6 +14,8 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -164,14 +166,7 @@ AUTH_USER_MODEL = 'account.Account'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-        'HOST': 'postgresql://postgres:eg3A-3B-BCFB*4BCDd36*c1GeECab33D@viaduct.proxy.rlwy.net:42445/railway',
-        'PORT': os.getenv('DATABASE_PORT')
-    }
+    'default': dj_database_url.config(default=os.getenv("DATABASE_URL"))
 }
 
 
