@@ -14,35 +14,28 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
-import dj_database_url
-
-
-
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
-load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
-DATABASE_URL = os.getenv('DATABASE_URL')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['nutriflex-ai.up.railway.app']
-
+ALLOWED_HOSTS = [   
+    
+]
 
 
 CORS_ALLOWED_ORIGINS = [
-    "https://nutriflex.vercel.app",
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://nutriflex-ai.up.railway.app"
 ]
 
 CORS_ALLOW_METHODS = (
@@ -63,13 +56,9 @@ CORS_ALLOW_HEADERS = (
     "x-requested-with",
 )
 
-CSRF_COOKIE_SECURE = True
+# Set the following to allow credentials (cookies, authorization headers, etc.).
 CORS_ALLOW_CREDENTIALS = True
-SESSION_COOKIE_SECURE = True
-# SECURE_HSTS_SECONDS = 300
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
+
 
 # Application definition
 
@@ -92,10 +81,7 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-     'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
+    )
 }
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
@@ -138,7 +124,6 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -174,10 +159,11 @@ AUTH_USER_MODEL = 'account.Account'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-db_config = dj_database_url.config(default=DATABASE_URL)
-db_config['ATOMIC_REQUESTS'] = True
 DATABASES = {
-    'default': db_config,
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -215,13 +201,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# The URL to use when referring to static files (where they will be served from)
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
