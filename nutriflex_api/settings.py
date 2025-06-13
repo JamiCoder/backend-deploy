@@ -60,6 +60,9 @@ CORS_ALLOW_HEADERS = (
 CORS_ALLOW_CREDENTIALS = True
 
 
+CSRF_TRUSTED_ORIGINS = ['https://nutriflex-ai.up.railway.app/']
+
+
 # Application definition
 
 INSTALLED_APPS = [
