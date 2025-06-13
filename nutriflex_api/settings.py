@@ -165,8 +165,12 @@ AUTH_USER_MODEL = 'account.Account'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': 'postgresql://postgres:eg3A-3B-BCFB*4BCDd36*c1GeECab33D@viaduct.proxy.rlwy.net:42445/railway',
+        'PORT': os.getenv('DATABASE_PORT')
     }
 }
 
